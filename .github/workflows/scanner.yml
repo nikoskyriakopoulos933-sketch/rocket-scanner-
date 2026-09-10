@@ -1,0 +1,54 @@
+name: Rocket Scanner (every 4h)
+
+ 
+
+on:
+
+  schedule:
+
+    - cron: '30 3,7,11,15,19,23 * * *'
+
+  workflow_dispatch:
+
+ 
+
+jobs:
+
+  scan:
+
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - name: Checkout repo
+
+        uses: actions/checkout@v4
+
+ 
+
+      - name: Set up Python
+
+        uses: actions/setup-python@v5
+
+        with:
+
+          python-version: '3.11'
+
+ 
+
+      - name: Install dependencies
+
+        run: pip install requests
+
+ 
+
+      - name: Run scanner
+
+        env:
+
+          TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
+
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+
+        run: python scanner.py
+
