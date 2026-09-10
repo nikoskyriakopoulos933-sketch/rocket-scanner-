@@ -216,3 +216,6 @@ for sig in sorted(premium, key=lambda x: -x.get("oi_spike", 0)):
     time.sleep(1)
 
 print(f"Done. {len(premium)} premium signals sent.")
+now_str = datetime.now(tz=timezone.utc).strftime("%H:%M UTC")
+
+send_telegram(f" 🕐 Εκτέλεση σαρωτή {now_str} — Σαρώθηκαν σύμβολα {len(universe)}, βρέθηκαν σήματα {len(premium)}.")
